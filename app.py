@@ -1,23 +1,27 @@
 import streamlit as st
-st.title("IRIS API")
+import sklearn 
+import joblib
 
 
+st.title("MACHINE LEARNING -IRIS")
 
-# Webpage
-sl = st.slider('Sepal Length', 4.3, 7.9, 5.1)
-sw = st.slider('Sepal Width', 4.5, 3.5, 2.2)
-pl = st.slider('Petal Length', 1.0, 6.9, 5.5)
-pw = st.slider('Petal Width', 0.1, 2.5, 2.2)
+sepal_length = st.slider('Enter sepal_length', 0.1, 7.9, 2.0) 
+sepal_width = st.slider('Enter sepal_width', 0.1, 7.9, 2.0)
+petal_length = st.slider('Enter petal_length', 0.1, 7.9, 2.0)
+petal_width = st.slider('Enter petal_width', 0.1, 7.9, 2.0)
 
 
-
-# Model
 from sklearn.datasets import load_iris
 iris=load_iris()
-# iris.keys()
+
+x=iris.data
+y=iris.target
+
 from sklearn.tree import DecisionTreeClassifier
 model=DecisionTreeClassifier()
-model.fit(iris.data,iris.target)
-op=model.predict([[sl,sw,pl,pw]])
-op=iris.target_names[op[0]]
-st.title(f'The flower species is {op}')
+
+model.fit(x,y)
+
+y=model.predict([[sepal_length,sepal_width,petal_length,petal_width]])
+output=iris.target_names[y[0]]
+st.write("iris class is",output)
