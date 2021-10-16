@@ -24,4 +24,4 @@ model.fit(x,y)
 
 y=model.predict([[sepal_length,sepal_width,petal_length,petal_width]])
 output=iris.target_names[y[0]]
-st.write("iris class is",output)
+st.title("Iris class is",output)
